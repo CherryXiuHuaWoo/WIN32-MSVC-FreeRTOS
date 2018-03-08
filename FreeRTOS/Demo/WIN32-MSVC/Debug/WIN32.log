@@ -1,45 +1,4 @@
 ﻿cl : 命令行 warning D9002: 忽略未知选项“/wc4574”
-  Run-time-stats-utils.c
-  main_full.c
   main_blinky.c
-  tasks.c
-  queue.c
-  port.c
-  list.c
-  main.c
-  timerdemo.c
-  TaskNotify.c
-  StreamBufferInterrupt.c
-  StreamBufferDemo.c
-  MessageBufferDemo.c
-  StaticAllocation.c
-  semtest.c
-  recmutex.c
-  QueueSetPolling.c
-  QueueSet.c
-  QueueOverwrite.c
-  QPeek.c
-  正在生成代码...
-  正在编译...
-  PollQ.c
-  MessageBufferAMP.c
-  IntSemTest.c
-  integer.c
-  GenQTest.c
-  flop.c
-  EventGroupsDemo.c
-  dynamic.c
-  death.c
-  countsem.c
-  blocktim.c
-  BlockQ.c
-  AbortDelay.c
-  timers.c
-  stream_buffer.c
-  heap_5.c
-  event_groups.c
-  croutine.c
-  trcSnapshotRecorder.c
-  trcKernelPort.c
-  正在生成代码...
+c:\users\80426\documents\github\win32-msvc-freertos-\freertos\demo\win32-msvc\main_blinky.c(141): warning C4189: “xTimerPeriod”: 局部变量已初始化但不引用
   WIN32.vcxproj -> C:\Users\80426\Documents\GitHub\WIN32-MSVC-FreeRTOS-\FreeRTOS\Demo\WIN32-MSVC\.\Debug\RTOSDemo.exe

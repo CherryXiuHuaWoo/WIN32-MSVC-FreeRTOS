@@ -160,6 +160,9 @@
     <ClCompile Include="..\Common\Minimal\MessageBufferAMP.c">
       <Filter>Demo App Source\Full_Demo\Common Demo Tasks</Filter>
     </ClCompile>
+    <ClCompile Include="UserTask.c">
+      <Filter>Demo App Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FreeRTOSConfig.h">
@@ -206,6 +209,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\include\stream_buffer.h">
       <Filter>FreeRTOS Source\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="UserTask.h">
+      <Filter>Demo App Source</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

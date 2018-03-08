@@ -131,6 +131,7 @@
     <ClCompile Include="main_blinky.c" />
     <ClCompile Include="main_full.c" />
     <ClCompile Include="Run-time-stats-utils.c" />
+    <ClCompile Include="UserTask.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\include\event_groups.h" />
@@ -148,6 +149,7 @@
     <ClInclude Include="..\..\Source\include\semphr.h" />
     <ClInclude Include="..\..\Source\include\task.h" />
     <ClInclude Include="Trace_Recorder_Configuration\trcConfig.h" />
+    <ClInclude Include="UserTask.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
