@@ -1,0 +1,166 @@
+
+# �ļ�ǰ��!���Ƿ����򣬽�ָ�����ļ���ӵ�git��
+
+# =========================
+# ����
+# =========================
+# ���Դ���ļ�
+*.zip
+*.tar
+*.tar.gz
+
+# C����
+
+# �����ļ�
+*.o
+*.d
+*.ko
+*.obj
+*.elf
+*.dep
+
+# Ԥ����ͷ�ļ�
+*.gch
+*.pch
+
+# ��̬���ӿ�
+*.lib
+*.la
+*.lo
+
+# ��̬���ӿ�
+*.dylib
+
+# ��ִ���ļ�
+*.hex
+*.bin
+*.out
+*.app
+*.i*86
+*.x86_64
+*.axf
+
+# List/MAP�ļ�
+*.map
+*.lst
+
+# =========================
+# ��������/VS Code
+# =========================
+*.VC.db
+src/.vscode
+.vscode/.browse.VC.db-wal
+.vscode/
+
+
+# =========================
+# ��������/Keil
+# =========================
+*.TMP
+*.d
+*.crf
+*.htm
+*.lnp
+*.dep
+JLinkLog.txt
+*.uvguix.*
+
+# =========================
+# ��������/Eclipse
+# =========================
+.metadata
+.recommenders
+.loadpath
+.settings/
+local.properties
+*.swp
+*.bak
+*.tmp
+
+# =========================
+# ��������/Source Insight
+# =========================
+*.SearchResults  # search results
+*.WK3            # workspace
+*.CF3
+*.IAB
+*.IAD
+*.IMB
+*.IMD
+*.PFI
+*.PO
+*.PR
+*.PRI
+*.PS
+FC-SourceInsight/
+
+# =========================
+# ��������/Matlab
+# =========================
+*.asv
+*.m~
+*.mex*
+slprj/
+octave-workspace
+ 
+
+# =========================
+# ����ϵͳ����ļ�/Windows
+# =========================
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# Windows SyncToy Data
+SyncToy_*.dat
+_gsdata_/
+
+# =========================
+# ����ϵͳ����ļ�/Linux
+# =========================
+*~
+
+.fuse_hidden*
+.directory
+.Trash-*
+
+
+# =========================
+# ����ϵͳ����ļ�/OSX
+# =========================
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# huangjian add
+Update_FC_SDK_DEV.cmd
+Tools/BWaker_Mini_V2.0/BWaker_Mini/bin/Debug/2017-11-13_Log.log
