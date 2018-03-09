@@ -57,22 +57,14 @@ void vTask1(void *pvParameters)
 	{
 		printf("Task 1 is running\r\n");
 
-		printf("Raise the Task2 priority\r\n");
-		vTaskPrioritySet(xTask2Handle, (uxPriority + 1));
+		xTaskCreate(vTask2, "Task 2", 100, NULL, 2, &xTask2Handle);
+
+		vTaskDelay(100 / portTICK_RATE_MS);
 	}
 }
 
 void vTask2(void *pvParameters)
 {
-	unsigned portBASE_TYPE uxPriority;
-
-	uxPriority = uxTaskPriorityGet(NULL);
-
-	while (1)
-	{
-		printf("Task 2 is running\r\n");
-
-		printf("Lower the Task2 priority\r\n");
-		vTaskPrioritySet(NULL, (uxPriority - 2));
-	}
+	printf("Task 2 is running. Task 2 will delete itself at soon\r\n");
+	vTaskDelete(xTask2Handle);
 }
