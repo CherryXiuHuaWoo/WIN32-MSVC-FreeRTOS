@@ -148,7 +148,7 @@ const TickType_t xTimerPeriod = mainTIMER_SEND_FREQUENCY_MS;
 		/* Start the two tasks as described in the comments at the top of this
 		file. */
 		xTaskCreate(vTaskFunction, "Task 1", 100, (void *)pcTextForTask1, 1, NULL);
-		xTaskCreate(vTaskFunction, "Task 2", 100, (void *)pcTextForTask2, 1, NULL);
+		xTaskCreate(vTaskFunction, "Task 2", 100, (void *)pcTextForTask2, 2, NULL);
 
 
 		//xTaskCreate( prvQueueReceiveTask,			/* The function that implements the task. */

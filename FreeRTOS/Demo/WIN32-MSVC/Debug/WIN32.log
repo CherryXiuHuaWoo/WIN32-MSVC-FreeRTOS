@@ -1,4 +1,5 @@
 ﻿cl : 命令行 warning D9002: 忽略未知选项“/wc4574”
-  main_blinky.c
-c:\users\80426\documents\github\win32-msvc-freertos-\freertos\demo\win32-msvc\main_blinky.c(141): warning C4189: “xTimerPeriod”: 局部变量已初始化但不引用
+  UserTask.c
+c:\users\80426\documents\github\win32-msvc-freertos-\freertos\demo\win32-msvc\usertask.c(34): warning C4047: “=”:“TickType_t”与“TickType_t (__cdecl *)(void)”的间接级别不同
+c:\users\80426\documents\github\win32-msvc-freertos-\freertos\demo\win32-msvc\usertask.c(26): warning C4101: “u1”: 未引用的局部变量
   WIN32.vcxproj -> C:\Users\80426\Documents\GitHub\WIN32-MSVC-FreeRTOS-\FreeRTOS\Demo\WIN32-MSVC\.\Debug\RTOSDemo.exe

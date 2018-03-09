@@ -5,6 +5,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "FreeRTOS.h"
+#include "task.h"
+
 #define	mainDelayTime	1000000
 
 /*
@@ -19,16 +22,28 @@ void vTaskFunction(void *pvParameters)
 {
 
 	char *pcTaskName;
+	portTickType xLastWakeTime;
 	volatile unsigned long u1;
 
 	pcTaskName = (char *)pvParameters;
 
+	/*Save the current TickTime Value.
+	 *Here is the only time for xLastWakeTime to assign.
+	 *xLaskWakeTime will be updated in vTaskDelayUntil.
+	 */
+	xLastWakeTime = xTaskGetTickCount;
+
 	while (1)
 	{
-		printf("%s", pcTaskName);
+		printf("Time0=%d,%s", (int)xLastWakeTime, pcTaskName);
+		
+		//while (1) {};
+		//vTaskDelay(250 / portTICK_RATE_MS);
+		vTaskDelayUntil(&xLastWakeTime, (250 / portTICK_RATE_MS));
+		printf("Time1=%d\r\n", (int)xLastWakeTime);
+	}
 
-		for (u1 = 0; u1 < mainDelayTime; u1++)
-		{
-		}
+	while (1)
+	{
 	}
 }
