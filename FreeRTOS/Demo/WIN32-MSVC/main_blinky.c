@@ -135,6 +135,10 @@ static TimerHandle_t xTimer = NULL;
 
 static const char *pcTextForTask1 = "Task 1 is running\r\n";
 static const char *pcTextForTask2 = "Task 2 is running\r\n";
+
+TaskHandle_t xTask1Handle;
+TaskHandle_t xTask2Handle;
+
 /*** SEE THE COMMENTS AT THE TOP OF THIS FILE ***/
 void main_blinky( void )
 {
@@ -147,25 +151,10 @@ const TickType_t xTimerPeriod = mainTIMER_SEND_FREQUENCY_MS;
 	{
 		/* Start the two tasks as described in the comments at the top of this
 		file. */
-		xTaskCreate(vTaskFunction, "Task 1", 100, (void *)pcTextForTask1, 1, NULL);
-		xTaskCreate(vTaskFunction, "Task 2", 100, (void *)pcTextForTask2, 2, NULL);
+		xTaskCreate(vTask1, "Task 1", 100, (void *)pcTextForTask1, 2, &xTask1Handle);
+		xTaskCreate(vTask2, "Task 2", 100, (void *)pcTextForTask2, 1, &xTask2Handle);
 
 
-		//xTaskCreate( prvQueueReceiveTask,			/* The function that implements the task. */
-		//			"Rx", 							/* The text name assigned to the task - for debug only as it is not used by the kernel. */
-		//			configMINIMAL_STACK_SIZE, 		/* The size of the stack to allocate to the task. */
-		//			NULL, 							/* The parameter passed to the task - not used in this simple case. */
-		//			mainQUEUE_RECEIVE_TASK_PRIORITY,/* The priority assigned to the task. */
-		//			NULL );							/* The task handle is not required, so NULL is passed. */
-
-		//xTaskCreate( prvQueueSendTask, "TX", configMINIMAL_STACK_SIZE, NULL, mainQUEUE_SEND_TASK_PRIORITY, NULL );
-
-		///* Create the software timer, but don't start it yet. */
-		//xTimer = xTimerCreate( "Timer",				/* The text name assigned to the software timer - for debug only as it is not used by the kernel. */
-		//						xTimerPeriod,		/* The period of the software timer in ticks. */
-		//						pdFALSE,			/* xAutoReload is set to pdFALSE, so this is a one shot timer. */
-		//						NULL,				/* The timer's ID is not used. */
-		//						prvQueueSendTimerCallback );/* The function executed when the timer expires. */
 
 		/* Start the tasks and timer running. */
 		vTaskStartScheduler();
