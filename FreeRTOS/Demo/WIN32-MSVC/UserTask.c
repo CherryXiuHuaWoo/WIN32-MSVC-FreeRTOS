@@ -7,64 +7,55 @@
 
 #include "FreeRTOS.h"
 #include "task.h"
+#include "queue.h"
 
-
-/*
- * Function Name: vTaskFunction
- * Description: vTaskFunction
- * Input: 
- *			pvParameters --- Parameters Pointer
- * Output:
- * Return: None
- */
-void vTaskFunction(void *pvParameters)
-{
-
-	char *pcTaskName;
-	portTickType xLastWakeTime;
-	volatile unsigned long u1;
-
-	pcTaskName = (char *)pvParameters;
-
-	/*Save the current TickTime Value.
-	 *Here is the only time for xLastWakeTime to assign.
-	 *xLaskWakeTime will be updated in vTaskDelayUntil.
-	 */
-	xLastWakeTime = xTaskGetTickCount;
-
-	while (1)
-	{
-		printf("Time0=%d,%s", (int)xLastWakeTime, pcTaskName);
-		
-		//vTaskDelay(250 / portTICK_RATE_MS);
-		vTaskDelayUntil(&xLastWakeTime, (250 / portTICK_RATE_MS));
-		printf("Time1=%d\r\n", (int)xLastWakeTime);
-	}
-
-	while (1)
-	{}
-}
+extern QueueHandle_t xQueue;
 extern TaskHandle_t xTask1Handle;
 extern TaskHandle_t xTask2Handle;
 
-void vTask1(void *pvParameters)
+void vSenderTask(void *pvParameters)
 {
-	unsigned portBASE_TYPE uxPriority;
+	long lValueToSend;
+	portBASE_TYPE xStatus;
 
-	uxPriority = uxTaskPriorityGet(NULL);
+	lValueToSend = (long)pvParameters;
 
 	while (1)
 	{
-		printf("Task 1 is running\r\n");
+		xStatus = xQueueSendToBack(xQueue, &lValueToSend, 0);
 
-		xTaskCreate(vTask2, "Task 2", 100, NULL, 2, &xTask2Handle);
+		if (xStatus != pdPASS)
+		{
+			printf("Could not send to the queue.\r\n");
+		}
 
-		vTaskDelay(100 / portTICK_RATE_MS);
+		/*Allow other tasks send data.taskYIELD API Fuction: inform Scheduler of joining other task.*/
+		taskYIELD();
 	}
 }
 
-void vTask2(void *pvParameters)
+void vReciverTask(void *pvParameters)
 {
-	printf("Task 2 is running. Task 2 will delete itself at soon\r\n");
-	vTaskDelete(xTask2Handle);
+	long lReceivedValue;
+	portBASE_TYPE xStatus;
+	const portTickType xTicksToWait = 100 / portTICK_RATE_MS;
+
+	while (1)
+	{
+		if (uxQueueMessagesWaiting(xQueue) != 0)
+		{
+			printf("Queue should have been empty!\r\n");
+		}
+
+		xStatus = xQueueReceive(xQueue, &lReceivedValue, xTicksToWait);
+		if (xStatus == pdPASS)
+		{
+			printf("Received= %d\r\n", lReceivedValue);
+		}
+		else
+		{
+			printf(" Could not receive from the queue.\r\n");
+		}
+	}
+
 }

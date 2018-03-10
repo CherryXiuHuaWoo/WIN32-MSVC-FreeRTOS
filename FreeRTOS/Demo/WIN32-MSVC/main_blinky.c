@@ -126,7 +126,7 @@ static void prvQueueSendTimerCallback( TimerHandle_t xTimerHandle );
 /*-----------------------------------------------------------*/
 
 /* The queue used by both tasks. */
-static QueueHandle_t xQueue = NULL;
+QueueHandle_t xQueue = NULL;
 
 /* A software timer that is started from the tick hook. */
 static TimerHandle_t xTimer = NULL;
@@ -151,8 +151,10 @@ const TickType_t xTimerPeriod = mainTIMER_SEND_FREQUENCY_MS;
 	{
 		/* Start the two tasks as described in the comments at the top of this
 		file. */
-		xTaskCreate(vTask1, "Task 1", 100, (void *)pcTextForTask1, 1, &xTask1Handle);
-		
+		xTaskCreate(vSenderTask, "SenderTask100", 100, (void *) 100, 1, &xTask1Handle);
+		xTaskCreate(vSenderTask, "SenderTask200", 100, (void *)200, 1, &xTask1Handle);
+		xTaskCreate(vSenderTask, "SenderTask300", 100, (void *)300, 1, &xTask1Handle);
+		xTaskCreate(vReciverTask, "ReciverTask", 100, NULL, 2, &xTask1Handle);
 
 
 
