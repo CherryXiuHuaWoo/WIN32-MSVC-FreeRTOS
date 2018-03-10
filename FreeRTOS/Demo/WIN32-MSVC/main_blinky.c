@@ -103,7 +103,7 @@ milliseconds to ticks using the pdMS_TO_TICKS() macro. */
 #define mainTIMER_SEND_FREQUENCY_MS			pdMS_TO_TICKS( 2000UL )
 
 /* The number of items the queue can hold at once. */
-#define mainQUEUE_LENGTH					( 2 )
+#define mainQUEUE_LENGTH					( 3 )
 
 /* The values sent to the queue receive task from the queue send task and the
 queue send software timer respectively. */
@@ -138,6 +138,7 @@ static const char *pcTextForTask2 = "Task 2 is running\r\n";
 
 TaskHandle_t xTask1Handle;
 TaskHandle_t xTask2Handle;
+extern xData xStructsToSend[2];
 
 /*** SEE THE COMMENTS AT THE TOP OF THIS FILE ***/
 void main_blinky( void )
@@ -145,16 +146,16 @@ void main_blinky( void )
 const TickType_t xTimerPeriod = mainTIMER_SEND_FREQUENCY_MS;
 
 	/* Create the queue. */
-	xQueue = xQueueCreate( mainQUEUE_LENGTH, sizeof( uint32_t ) );
+	xQueue = xQueueCreate( mainQUEUE_LENGTH, sizeof(xData) );
 
 	if( xQueue != NULL )
 	{
 		/* Start the two tasks as described in the comments at the top of this
 		file. */
-		xTaskCreate(vSenderTask, "SenderTask100", 100, (void *) 100, 1, &xTask1Handle);
-		xTaskCreate(vSenderTask, "SenderTask200", 100, (void *)200, 1, &xTask1Handle);
-		xTaskCreate(vSenderTask, "SenderTask300", 100, (void *)300, 1, &xTask1Handle);
-		xTaskCreate(vReciverTask, "ReciverTask", 100, NULL, 2, &xTask1Handle);
+		xTaskCreate(vSenderTask, "SenderTask100", 100, &(xStructsToSend[0]), 1, NULL);
+		xTaskCreate(vSenderTask, "SenderTask200", 100, &(xStructsToSend[1]), 1, NULL);
+
+		xTaskCreate(vReciverTask, "ReciverTask", 100, NULL, 2, NULL);
 
 
 

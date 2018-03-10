@@ -13,16 +13,21 @@ extern QueueHandle_t xQueue;
 extern TaskHandle_t xTask1Handle;
 extern TaskHandle_t xTask2Handle;
 
+xData xStructsToSend[2] = 
+{
+	{ 100, 1},
+	{ 200, 2}
+};
 void vSenderTask(void *pvParameters)
 {
-	long lValueToSend;
+	xData *lValueToSend;
 	portBASE_TYPE xStatus;
 
-	lValueToSend = (long)pvParameters;
+	lValueToSend = (xData *)pvParameters;
 
 	while (1)
 	{
-		xStatus = xQueueSendToBack(xQueue, &lValueToSend, 0);
+		xStatus = xQueueSendToBack(xQueue, lValueToSend, 0);
 
 		if (xStatus != pdPASS)
 		{
@@ -36,7 +41,7 @@ void vSenderTask(void *pvParameters)
 
 void vReciverTask(void *pvParameters)
 {
-	long lReceivedValue;
+	xData xReceivedStructure;
 	portBASE_TYPE xStatus;
 	const portTickType xTicksToWait = 100 / portTICK_RATE_MS;
 
@@ -44,13 +49,14 @@ void vReciverTask(void *pvParameters)
 	{
 		if (uxQueueMessagesWaiting(xQueue) != 0)
 		{
-			printf("Queue should have been empty!\r\n");
+			printf("Queue should have been empty\r\n");
+
 		}
 
-		xStatus = xQueueReceive(xQueue, &lReceivedValue, xTicksToWait);
+		xStatus = xQueueReceive(xQueue, &xReceivedStructure, xTicksToWait);
 		if (xStatus == pdPASS)
 		{
-			printf("Received= %d\r\n", lReceivedValue);
+			printf("From Sender %d = %d\r\n", xReceivedStructure.ucSource, xReceivedStructure.ucValue);
 		}
 		else
 		{
